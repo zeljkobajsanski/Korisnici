@@ -1,6 +1,7 @@
 ﻿using System;
 using rs.mvc.Korisnici.Model;
 using rs.mvc.Korisnici.Repository;
+using rs.mvc.Korisnici.Services;
 
 namespace rs.mvc.Korisnici.ConsoleAdmin
 {
@@ -24,12 +25,13 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
 
         private static void Process(string command)
         {
+            if (command == "kraj") return;
             if (command == "pomoc")
             {
                 Help();
                 return;
             }
-            else if (command == "aplikacije")
+            if (command == "aplikacije")
             {
                 ListajAplikacije();
                 return;
@@ -46,11 +48,16 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
         private static void KreirajAplikaciju(string command)
         {
             var parts = command.Split(' ');
-            if (parts.Length != 2)
+            if (parts.Length != 3)
             {
                 PrikaziGresku(command);
                 return;
             }
+            Aplikacije.KreirajAplikaciju(new Aplikacija()
+            {
+                Kod = parts[1],
+                Naziv = parts[2]
+            });
         }
 
         private static void PrikaziGresku(string command)
@@ -79,7 +86,7 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
             Console.WriteLine("pomoc - spisak komandi");
             Console.WriteLine("kraj - kraj rada");
             Console.WriteLine("aplikacije - listing aplikacija");
-            Console.WriteLine("kreiraj-aplikaciju [naziv aplikacije] - kreiranje nove aplikacije");
+            Console.WriteLine("kreiraj-aplikaciju [kod] [naziv aplikacije] - kreiranje nove aplikacije");
         }
     }
 }
