@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Model\Aplikacija.cs" />
     <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Korisnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
