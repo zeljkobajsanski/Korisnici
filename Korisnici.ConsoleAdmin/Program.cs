@@ -199,7 +199,7 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
             Console.WriteLine("kraj - kraj rada");
             Console.WriteLine("aplikacije - listing aplikacija");
             Console.WriteLine("kreiraj-aplikaciju [kod] [naziv aplikacije] - kreiranje nove aplikacije");
-            Console.WriteLine("kreiraj-korisnika [korisničko ime] [lozinka] [e-mail] [ime] [prezime] [administrator(da/ne)] [kod aplikcaije*]- kreiraj novog korisnika");
+            Console.WriteLine("kreiraj-korisnika [korisničko ime] [lozinka] [e-mail] [ime] [prezime] [administrator(da/ne)] [kod aplikacije*]- kreiraj novog korisnika");
             Console.WriteLine("lista-korisnika - listing korisnika");
             Console.WriteLine("korisnici-aplikacije [kod aplikacije] - listing korisnika aplikacije");
         }
