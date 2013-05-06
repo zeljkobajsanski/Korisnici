@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace mvc.com.Korisnici.Model
+namespace rs.mvc.Korisnici.Model
 {
     public class Korisnik : Entity
     {

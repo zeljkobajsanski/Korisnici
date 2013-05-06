@@ -1,4 +1,4 @@
-﻿namespace mvc.com.Korisnici.Model
+﻿namespace rs.mvc.Korisnici.Model
 {
     public class Entity
     {

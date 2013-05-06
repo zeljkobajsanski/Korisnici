@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using mvc.com.Korisnici.Model;
 using System.Linq;
+using rs.mvc.Korisnici.Model;
 
-namespace mvc.com.Korisnici.Repository
+namespace rs.mvc.Korisnici.Repository
 {
     public class Repository<T> : IDisposable where T : Entity
     {

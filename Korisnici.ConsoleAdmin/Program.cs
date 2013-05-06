@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mvc.com.Korisnici.Model;
-using mvc.com.Korisnici.Repository;
+using rs.mvc.Korisnici.Model;
+using rs.mvc.Korisnici.Repository;
 
-namespace Korisnici.ConsoleAdmin
+namespace rs.mvc.Korisnici.ConsoleAdmin
 {
     class Program
     {

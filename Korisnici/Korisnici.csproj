@@ -7,7 +7,7 @@
     <ProjectGuid>{670795CF-DC65-45F6-B45D-345E40ECF0CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mvc.com.Korisnici</RootNamespace>
+    <RootNamespace>rs.mvc.Korisnici</RootNamespace>
     <AssemblyName>Korisnici</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
