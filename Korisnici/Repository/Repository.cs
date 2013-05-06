@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using mvc.com.Korisnici.Model;
 using System.Linq;
 
 namespace mvc.com.Korisnici.Repository
 {
-    public class Repository<T> where T : Entity
+    public class Repository<T> : IDisposable where T : Entity
     {
         public Repository()
         {
@@ -49,6 +50,11 @@ namespace mvc.com.Korisnici.Repository
         public void Save()
         {
             DataContext.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            DataContext.Dispose();
         }
     }
 }

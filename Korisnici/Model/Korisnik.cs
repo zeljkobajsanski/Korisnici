@@ -27,5 +27,7 @@ namespace mvc.com.Korisnici.Model
         public Aplikacija Aplikacija { get; set; }
 
         public int AplikacijaId { get; set; }
+
+        public bool Administrator { get; set; }
     }
 }
