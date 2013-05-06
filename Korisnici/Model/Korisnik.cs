@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace rs.mvc.Korisnici.Model
 {
@@ -24,9 +25,12 @@ namespace rs.mvc.Korisnici.Model
         [Required(ErrorMessage = "Lozinka nije uneta")]
         public byte[] Lozinka { get; set; }
 
+        [NotMapped]
+        public string LozinkaPlain { get; set; }
+
         public Aplikacija Aplikacija { get; set; }
 
-        public int AplikacijaId { get; set; }
+        public int? AplikacijaId { get; set; }
 
         public bool Administrator { get; set; }
     }

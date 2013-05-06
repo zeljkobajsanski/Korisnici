@@ -7,7 +7,7 @@ namespace rs.mvc.Korisnici.Model
 
         static DataContext()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<DataContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
         }
 
         public DbSet<Aplikacija> Aplikacije { get; set; }

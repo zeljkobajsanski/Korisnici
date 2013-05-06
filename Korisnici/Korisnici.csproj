@@ -49,8 +49,11 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Korisnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AplikacijeRepository.cs" />
+    <Compile Include="Repository\KorisniciRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Services\Aplikacije.cs" />
+    <Compile Include="Services\Korisnici.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

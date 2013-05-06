@@ -1,4 +1,5 @@
-﻿using rs.mvc.Korisnici.Model;
+﻿using System.Collections.Generic;
+using rs.mvc.Korisnici.Model;
 using rs.mvc.Korisnici.Repository;
 
 namespace rs.mvc.Korisnici.Services
@@ -13,5 +14,13 @@ namespace rs.mvc.Korisnici.Services
                  r.Save();
              }
          }
+
+        public static IEnumerable<Korisnik> VratiKorisnike(string kodAplikacije)
+        {
+            using (var r = new AplikacijeRepository())
+            {
+                return r.VratiKorisnikeAplikacije(kodAplikacije);
+            }
+        }
     }
 }
