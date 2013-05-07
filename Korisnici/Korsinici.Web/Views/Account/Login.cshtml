@@ -1,0 +1,56 @@
+﻿@{
+    var appCode = (string)ViewBag.Application;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prijava</title>
+        <link href="~/Content/jqx.base.css" rel="stylesheet" />
+        <link href="~/Content/jqx.bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/jqx.metro.css" rel="stylesheet" />
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+        <script src="~/Scripts/jqxcore.js"></script>
+        <script src="~/Scripts/jqxinput.js"></script>
+        <script src="~/Scripts/jqxbuttons.js"></script>
+        <script>
+            $(function() {
+                var theme = 'metro',
+                    username = $("#username"),
+                    password = $("#password"),
+                    btnSubmit = $("#btnSubmit"),
+                    application = $("#application");
+
+                username.jqxInput({ theme: theme, height: 24 });
+                password.jqxInput({ theme: theme, height: 24 });
+                btnSubmit.jqxButton({ theme: theme, height: 34, width: 84 });
+                btnSubmit.on('click', function() {
+                    $.ajax({
+                        url: '@Url.Action("Login")',
+                        type: 'POST',
+                        contentType: 'application/json; charset=UTF-8',
+                        data: JSON.stringify({ Username: username.val(), Password: password.val(), Application: application.val() }),
+                        success: function(response) {
+                            
+                        },
+                        //error: function(response) {
+                            
+                        //}
+                    });
+                });
+            })
+        </script>
+        <style>
+            #username, #password, #btnSubmit {
+                padding: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="javacript:;">
+            @Html.Hidden("application", appCode)
+            <input id="username"/>
+            <input id="password" type="password" />
+            <input type="submit" value="Prijavi me" id="btnSubmit" />
+        </form>
+    </body>
+</html>

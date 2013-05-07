@@ -6,6 +6,11 @@ namespace rs.mvc.Korisnici.Repository
 {
     public class KorisniciRepository : Repository<Korisnik>
     {
-         
+        public Korisnik VratiKorisnika(string korisnickoIme, string aplikacija)
+        {
+            return
+                DataContext.Korisnici.SingleOrDefault(
+                    x => x.Aplikacija.Kod == aplikacija && x.KorisnickoIme == korisnickoIme);
+        }
     }
 }
