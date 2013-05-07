@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using rs.mvc.Korisnici.Initializers;
 
 namespace rs.mvc.Korisnici.Model
 {
@@ -8,7 +9,7 @@ namespace rs.mvc.Korisnici.Model
         static DataContext()
         {
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
-            Database.SetInitializer(new CreateDatabaseIfNotExists<DataContext>());
+            Database.SetInitializer(new DbInitializer());
         }
 
         public DataContext() : this("KorisniciConnection")
@@ -21,6 +22,7 @@ namespace rs.mvc.Korisnici.Model
 
         public DbSet<Aplikacija> Aplikacije { get; set; }
         public DbSet<Korisnik> Korisnici { get; set; }
+        public DbSet<Log> LogoviKorisnika { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,6 +32,9 @@ namespace rs.mvc.Korisnici.Model
 
             var korisnici = modelBuilder.Entity<Korisnik>();
             korisnici.ToTable("KorisnickiNalozi");
+
+            var logovi = modelBuilder.Entity<Log>();
+            logovi.ToTable("LogoviKorisnika");
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Korsinici.Web.Models;
 using Korsinici.Web.ViewModels;
+using rs.mvc.Korisnici.Filters;
 using rs.mvc.Korisnici.Model;
 using rs.mvc.Korisnici.Repository;
 using rs.mvc.Korisnici.Services;
@@ -42,11 +43,20 @@ namespace Korsinici.Web.Controllers
             try
             {
                 var korisnik = Korisnici.PrijaviKorisnika(user.Username, user.Password, user.Application);
+                var log = new Log
+                {
+                    KorisnickoIme = korisnik.KorisnickoIme,
+                    DatumPrijave = DateTime.Now,
+                    VremePoslednjeAktivnosti = DateTime.Now
+                };
+                using (var logoviRepository = new LogoviKorisnikaRepository())
+                {
+                    logoviRepository.Add(log);
+                    logoviRepository.Save();
+                }
                 var cookie = FormsAuthentication.GetAuthCookie(korisnik.KorisnickoIme, false);
-                //var ticket = new FormsAuthenticationTicket(1, korisnickiNalog.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6),
-                //                                           false, nalog.ID.ToString());
-
-                //cookie.Value = FormsAuthentication.Encrypt(ticket);
+                var ticket = new FormsAuthenticationTicket(1, korisnik.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6), false, log.Id.ToString());
+                cookie.Value = FormsAuthentication.Encrypt(ticket);
                 Response.Cookies.Add(cookie);
                 var url = korisnik.Aplikacija.HomeUrl;
                 return RedirectPermanent(url);
@@ -57,6 +67,5 @@ namespace Korsinici.Web.Controllers
                 return View("Login", new LoginViewModel { ApplicationCode = user.Application, User = user });
             }
         }
-
     }
 }
