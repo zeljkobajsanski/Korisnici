@@ -15,6 +15,11 @@ namespace rs.mvc.Korisnici.Repository
          public IEnumerable<Korisnik> VratiKorisnikeAplikacije(string kodAplikacije)
          {
              return DataContext.Korisnici.Include("Aplikacija").Where(x => x.Aplikacija.Kod == kodAplikacije).ToArray();
-         } 
+         }
+
+        public Aplikacija VratiAplikaciju(string appCode)
+        {
+            return DataContext.Aplikacije.SingleOrDefault(x => x.Kod == appCode);
+        }
     }
 }

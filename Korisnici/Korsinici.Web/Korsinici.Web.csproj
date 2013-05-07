@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Content\images\lightness\ui-icons_ef8c08_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\logo\oktopod.png" />
     <Content Include="Content\images\map-hue.png" />
     <Content Include="Content\images\map-saturation-overlay.png" />
     <Content Include="Content\images\map-saturation.png" />

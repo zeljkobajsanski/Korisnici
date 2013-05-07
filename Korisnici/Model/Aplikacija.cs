@@ -14,6 +14,8 @@ namespace rs.mvc.Korisnici.Model
         [StringLength(255, ErrorMessage = "Dozvoljena dužina naziva aplikacije je do 255 karaktera")]
         public string Naziv { get; set; }
 
+        public string Logo { get; set; }
+
         public IList<Korisnik> Korisnici { get; set; }
     }
 }

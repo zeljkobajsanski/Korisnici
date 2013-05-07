@@ -1,6 +1,4 @@
-﻿@{
-    var appCode = (string)ViewBag.Application;
-}
+﻿@model Korsinici.Web.ViewModels.LoginViewModel
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,42 +13,103 @@
         <script>
             $(function() {
                 var theme = 'metro',
-                    username = $("#username"),
-                    password = $("#password"),
+                    username = $("#User_Username"),
+                    password = $("#User_Password"),
                     btnSubmit = $("#btnSubmit"),
-                    application = $("#application");
+                    application = $("#User_Application");
 
-                username.jqxInput({ theme: theme, height: 24 });
-                password.jqxInput({ theme: theme, height: 24 });
-                btnSubmit.jqxButton({ theme: theme, height: 34, width: 84 });
-                btnSubmit.on('click', function() {
-                    $.ajax({
-                        url: '@Url.Action("Login")',
-                        type: 'POST',
-                        contentType: 'application/json; charset=UTF-8',
-                        data: JSON.stringify({ Username: username.val(), Password: password.val(), Application: application.val() }),
-                        success: function(response) {
-                            
-                        },
-                        //error: function(response) {
-                            
-                        //}
-                    });
-                });
+                username.jqxInput({ theme: theme, width: 320, height: 24, placeHolder: 'Korisničko ime' });
+                password.jqxInput({ theme: theme, width: 320, height: 24, placeHolder: 'Lozinka' });
+                btnSubmit.jqxButton({ theme: theme, width: 84, height: 34 });
+                username.focus();
             })
         </script>
         <style>
-            #username, #password, #btnSubmit {
+            body {
+                font-family: 'segoe ui', arial, sans-serif;
+                width: 324px;
+                margin: auto;
+            }
+            ul {
+                font-size: 8pt;
+                color: red;
+                list-style-type: none;
+                margin: 4px;
+                padding: 0;
+            }
+            #User_Username, #User_Password, #btnSubmit {
                 padding: 4px;
+            }
+            .line {
+                margin: 4px;
+            }
+            input:focus {
+                border: 1px solid black;
+            }
+            form {
+                position: absolute;
+                top: 30%;
+                margin-top: -77px;
+            }
+            
+            a:hover {
+                color: #338ED1;
+            }
+            a, a:visited {
+                color: #0072C6;
+            }
+            a:visited {
+                color: #2672EC;
+            }
+            a, a:visited {
+                color: #0072C6;
+            }
+            a {
+                margin: 4px;
+                font-size: 12px;
+                text-decoration: none;
+                color: #2672EC;
+                cursor: pointer;
+            }
+            p {
+                font-size: 14px;
+            }
+            p span a {
+                font-size: 14px;
+                font-weight: bold;
             }
         </style>
     </head>
     <body>
-        <form action="javacript:;">
-            @Html.Hidden("application", appCode)
-            <input id="username"/>
-            <input id="password" type="password" />
-            <input type="submit" value="Prijavi me" id="btnSubmit" />
-        </form>
+        
+        @using (@Html.BeginForm())
+        {
+            if (Model.Logo != null)
+            {
+                <img src="@Url.Content("~/Content/images/logo/" + @Model.Logo)" alt="@Model.ApplicationName"/>
+            }
+            else
+            {
+                <h1>
+                    @Model.ApplicationName
+                </h1>    
+            }
+            
+            @Html.HiddenFor(x => x.User.Application)
+            <div class="line">
+                @Html.TextBoxFor(x => x.User.Username)    
+            </div>
+            <div class="line">
+                @Html.PasswordFor(x => x.User.Password)    
+            </div>
+            @Html.ValidationSummary()
+            <div class="line" style="margin-top: 8px">
+                <input type="submit" value="Prijavi me" id="btnSubmit" />    
+            </div>
+            <div>
+                @Html.ActionLink("Zaboravili ste lozinku?", "")
+            </div>
+            <p>Nemate kreiran nalog? <span>@Html.ActionLink("Kreirajte nalog", "")</span></p>
+        }
     </body>
 </html>
