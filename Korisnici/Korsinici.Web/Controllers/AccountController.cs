@@ -49,8 +49,14 @@ namespace Korsinici.Web.Controllers
                     DatumPrijave = DateTime.Now,
                     VremePoslednjeAktivnosti = DateTime.Now
                 };
+                Aplikacija aplikacija;
+                using (var appRepos = new AplikacijeRepository())
+                {
+                    aplikacija = appRepos.VratiAplikaciju(user.Application);
+                }
                 using (var logoviRepository = new LogoviKorisnikaRepository())
                 {
+                    log.Aplikacija = aplikacija.Naziv;
                     logoviRepository.Add(log);
                     logoviRepository.Save();
                 }
@@ -58,7 +64,7 @@ namespace Korsinici.Web.Controllers
                 var ticket = new FormsAuthenticationTicket(1, korisnik.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6), false, log.Id.ToString());
                 cookie.Value = FormsAuthentication.Encrypt(ticket);
                 Response.Cookies.Add(cookie);
-                var url = korisnik.Aplikacija.HomeUrl;
+                var url = korisnik.Aplikacije.Single(x => x.Kod == user.Application).HomeUrl;
                 return RedirectPermanent(url);
             }
             catch (Exception exc)

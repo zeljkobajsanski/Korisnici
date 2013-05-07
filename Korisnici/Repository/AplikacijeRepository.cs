@@ -14,7 +14,8 @@ namespace rs.mvc.Korisnici.Repository
 
          public IEnumerable<Korisnik> VratiKorisnikeAplikacije(string kodAplikacije)
          {
-             return DataContext.Korisnici.Include("Aplikacija").Where(x => x.Aplikacija.Kod == kodAplikacije).ToArray();
+             var aplikacija = DataContext.Aplikacije.Include("Korisnici").SingleOrDefault(x => x.Kod == kodAplikacije);
+             return aplikacija != null ? aplikacija.Korisnici.ToArray() : Enumerable.Empty<Korisnik>();
          }
 
         public Aplikacija VratiAplikaciju(string appCode)

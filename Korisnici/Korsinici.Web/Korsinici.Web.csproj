@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <Content Include="Content\images\lightness\ui-icons_ef8c08_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\logo\adminApp.png" />
     <Content Include="Content\images\logo\oktopod.png" />
     <Content Include="Content\images\map-hue.png" />
     <Content Include="Content\images\map-saturation-overlay.png" />
@@ -355,7 +357,11 @@
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\logo\adminApp.pdn" />
     <None Include="Properties\PublishProfiles\Dropbox.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

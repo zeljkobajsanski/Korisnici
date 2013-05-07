@@ -9,6 +9,14 @@ namespace rs.mvc.Korisnici.Initializers
         protected override void Seed(DataContext context)
         {
             base.Seed(context);
+            var adminApp = new Aplikacija
+            {
+                Kod = "admin",
+                Naziv = "MVC admin",
+                Logo = "adminApp.png",
+                HomeUrl = "http://localhost:49926"
+            };
+            context.Aplikacije.Add(adminApp);
             var oktopod = new Aplikacija
             {
                 Kod = "rvms",
@@ -16,6 +24,7 @@ namespace rs.mvc.Korisnici.Initializers
                 Logo = "oktopod.png",
                 HomeUrl = "http://rvms.azurewebsites.net"
             };
+            context.Aplikacije.Add(oktopod);
             var zeks = new Korisnik
             {
                 KorisnickoIme = "zeks",
@@ -23,10 +32,10 @@ namespace rs.mvc.Korisnici.Initializers
                 Ime = "Željko",
                 Prezime = "Bajšanski",
                 Administrator = true,
-                Lozinka = HashUtils.GetHash("1302"),
-                Aplikacija = oktopod
+                Lozinka = HashUtils.GetHash("Z3ks_J0va"),
             };
-            context.Aplikacije.Add(oktopod);
+            zeks.Aplikacije.Add(adminApp);
+            zeks.Aplikacije.Add(oktopod);
             context.Korisnici.Add(zeks);
 
             context.SaveChanges();

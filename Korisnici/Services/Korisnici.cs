@@ -21,7 +21,11 @@ namespace rs.mvc.Korisnici.Services
                  {
                      using (var ar = new AplikacijeRepository())
                      {
-                         korisnik.AplikacijaId = ar.VratiIdAplikacije(kodAplikacije);
+                         var app = ar.VratiAplikaciju(kodAplikacije);
+                         if (app != null)
+                         {
+                             korisnik.Aplikacije.Add(app);
+                         }
                      }
                  }
                  r.Save();
