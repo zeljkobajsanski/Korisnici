@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Korsinici.Web.Models;
 using Korsinici.Web.ViewModels;
 using rs.mvc.Korisnici.Model;
@@ -40,12 +41,19 @@ namespace Korsinici.Web.Controllers
             }
             try
             {
-                Korisnici.PrijaviKorisnika(user.Username, user.Password, user.Application);
-                return Json("ok");
+                var korisnik = Korisnici.PrijaviKorisnika(user.Username, user.Password, user.Application);
+                var cookie = FormsAuthentication.GetAuthCookie(korisnik.KorisnickoIme, false);
+                //var ticket = new FormsAuthenticationTicket(1, korisnickiNalog.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6),
+                //                                           false, nalog.ID.ToString());
+
+                //cookie.Value = FormsAuthentication.Encrypt(ticket);
+                Response.Cookies.Add(cookie);
+                var url = korisnik.Aplikacija.HomeUrl;
+                return RedirectPermanent(url);
             }
             catch (Exception exc)
             {
-                ModelState.AddModelError("user.Username", exc);
+                TempData["Error"] = exc.Message;
                 return View("Login", new LoginViewModel { ApplicationCode = user.Application, User = user });
             }
         }

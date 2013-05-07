@@ -35,7 +35,7 @@ namespace rs.mvc.Korisnici.Services
             return hash;
         }
 
-        public static void PrijaviKorisnika(string korisnickoIme, string lozinka, string aplikacija)
+        public static Korisnik PrijaviKorisnika(string korisnickoIme, string lozinka, string aplikacija)
         {
             using (var r = new KorisniciRepository())
             {
@@ -43,6 +43,7 @@ namespace rs.mvc.Korisnici.Services
                 if (korisnik == null) throw new Exception("Korisnik ne postoji");
                 var pwd = Hash(lozinka);
                 if (!pwd.SequenceEqual(korisnik.Lozinka)) throw new Exception("Lozinka se ne poklapa");
+                return korisnik;
             }
         }
     }

@@ -9,7 +9,7 @@ namespace rs.mvc.Korisnici.Repository
         public Korisnik VratiKorisnika(string korisnickoIme, string aplikacija)
         {
             return
-                DataContext.Korisnici.SingleOrDefault(
+                DataContext.Korisnici.Include("Aplikacija").SingleOrDefault(
                     x => x.Aplikacija.Kod == aplikacija && x.KorisnickoIme == korisnickoIme);
         }
     }

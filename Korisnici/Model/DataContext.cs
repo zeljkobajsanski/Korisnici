@@ -7,7 +7,16 @@ namespace rs.mvc.Korisnici.Model
 
         static DataContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<DataContext>());
+        }
+
+        public DataContext() : this("KorisniciConnection")
+        {
+        }
+
+        public DataContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
         }
 
         public DbSet<Aplikacija> Aplikacije { get; set; }
