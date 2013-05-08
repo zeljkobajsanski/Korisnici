@@ -17,20 +17,8 @@ namespace rs.mvc.Korisnici.Model
 
         public DateTime VremePoslednjeAktivnosti { get; set; }
 
-        public int VremeNeaktivnosti { get; set; }
-
         public string IpAdresa { get; set; }
 
         public string Browser { get; set; }
-
-        public int PostaviVremeNeaktivnosti()
-        {
-            var now = DateTime.Now;
-            VremeNeaktivnosti = (int)now.Subtract(VremePoslednjeAktivnosti).TotalSeconds;
-            VremePoslednjeAktivnosti = now;
-            return VremeNeaktivnosti;
-        }
-
-        
     }
 }

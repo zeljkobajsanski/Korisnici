@@ -75,9 +75,9 @@ namespace Korsinici.Web.Controllers
                 Response.Cookies.Add(idLogaCookie);
                 var korisnikCookie = new HttpCookie("korisnici_korisnik", ser.Serialize(new
                 {
-                    KorisnickoIme = korisnik.KorisnickoIme,
+                    korisnik.KorisnickoIme,
                     Korisnik = korisnik.Ime + " " + korisnik.Prezime,
-                    Admin = korisnik.Administrator
+                    korisnik.Administrator
                 }));
                 Response.Cookies.Add(korisnikCookie);
                 var url = aplikacija.HomeUrl;

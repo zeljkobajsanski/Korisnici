@@ -20,8 +20,11 @@ namespace rs.mvc.Korisnici.Filters
             using (var r = new LogoviKorisnikaRepository())
             {
                 var log = r.Get(logId);
-                log.PostaviVremeNeaktivnosti();
-                r.Save();
+                if (log != null)
+                {
+                    log.VremePoslednjeAktivnosti = DateTime.Now;
+                    r.Save();
+                }
             }
         }
     }
