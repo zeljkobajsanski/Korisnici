@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using Korsinici.Web.Models;
 using Korsinici.Web.ViewModels;
@@ -57,13 +59,25 @@ namespace Korsinici.Web.Controllers
                 using (var logoviRepository = new LogoviKorisnikaRepository())
                 {
                     log.Aplikacija = aplikacija.Naziv;
+                    log.IpAdresa = HttpContext.Request.UserHostAddress;
+                    log.Browser = HttpContext.Request.UserAgent;
                     logoviRepository.Add(log);
                     logoviRepository.Save();
                 }
                 var cookie = FormsAuthentication.GetAuthCookie(korisnik.KorisnickoIme, false);
-                var ticket = new FormsAuthenticationTicket(1, korisnik.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6), false, log.Id.ToString());
+                var ticket = new FormsAuthenticationTicket(1, korisnik.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6), false, "");
                 cookie.Value = FormsAuthentication.Encrypt(ticket);
                 Response.Cookies.Add(cookie);
+                var ser = new JavaScriptSerializer();
+                var idLogaCookie = new HttpCookie("korisnici_idLoga", log.Id.ToString());
+                Response.Cookies.Add(idLogaCookie);
+                var korisnikCookie = new HttpCookie("korisnici_korisnik", ser.Serialize(new
+                {
+                    KorisnickoIme = korisnik.KorisnickoIme,
+                    Korisnik = korisnik.Ime + " " + korisnik.Prezime,
+                    Admin = korisnik.Administrator
+                }));
+                Response.Cookies.Add(korisnikCookie);
                 var url = korisnik.Aplikacije.Single(x => x.Kod == user.Application).HomeUrl;
                 return RedirectPermanent(url);
             }

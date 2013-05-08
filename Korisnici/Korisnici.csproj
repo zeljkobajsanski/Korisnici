@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\Aktivnost.cs" />
+    <Compile Include="Filters\LogujAktivnost.cs" />
     <Compile Include="Initializers\DbInitializer.cs" />
     <Compile Include="Model\Aplikacija.cs" />
     <Compile Include="Model\DataContext.cs" />
