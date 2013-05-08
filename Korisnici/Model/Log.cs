@@ -25,7 +25,9 @@ namespace rs.mvc.Korisnici.Model
 
         public int PostaviVremeNeaktivnosti()
         {
-            VremeNeaktivnosti = (int)DateTime.Now.Subtract(VremePoslednjeAktivnosti).TotalMinutes;
+            var now = DateTime.Now;
+            VremeNeaktivnosti = (int)now.Subtract(VremePoslednjeAktivnosti).TotalSeconds;
+            VremePoslednjeAktivnosti = now;
             return VremeNeaktivnosti;
         }
 

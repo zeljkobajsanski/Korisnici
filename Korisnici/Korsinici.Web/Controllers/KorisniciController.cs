@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Korsinici.Web.Models;
+using rs.mvc.Korisnici.Filters;
 using rs.mvc.Korisnici.Model;
 using rs.mvc.Korisnici.Repository;
 
 namespace Korsinici.Web.Controllers
 {
     [Authorize]
+    [LogujAktivnost]
     public class KorisniciController : Controller
     {
         //
