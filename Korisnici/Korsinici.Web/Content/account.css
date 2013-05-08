@@ -1,0 +1,70 @@
+﻿@font-face{font-family:'segoe ui';src:local("Segoe UI"),url(SegoeUI.ttf)}
+
+body {
+    font-family: 'segoe ui', arial, sans-serif;
+    width: 500px;
+    margin: auto;
+}
+
+a:hover {
+    color: #338ED1;
+}
+a, a:visited {
+    color: #0072C6;
+}
+a:visited {
+    color: #2672EC;
+}
+a, a:visited {
+    color: #0072C6;
+}
+a {
+    margin: 4px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #2672EC;
+    cursor: pointer;
+}
+p {
+    font-size: 14px;
+}
+
+input:focus {
+    border: 1px solid black;
+}
+
+.line {
+    margin: 4px;
+    clear: both;
+}
+
+p.errorSummary, ul {
+    font-size: 8pt;
+    color: red;
+    list-style-type: none;
+    margin: 4px;
+    padding: 0;
+}
+
+input[type=text].jqx-input, input[type=password].jqx-input {
+    width: 320px;
+    height: 24px;
+    padding: 4px;
+}
+
+.jqx-validator-error-label {
+    margin-left: 4px;
+    display: inline;
+    font-size: 12px;
+}
+
+input[type=submit] {
+    height: 34px;
+    width: 120px;
+    margin-left: 210px;
+}
+
+.content {
+    position: absolute;
+    top: 20%;
+}

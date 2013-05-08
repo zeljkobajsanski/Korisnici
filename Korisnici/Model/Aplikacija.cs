@@ -5,6 +5,10 @@ namespace rs.mvc.Korisnici.Model
 {
     public class Aplikacija : Entity
     {
+        public Aplikacija()
+        {
+            Aktivan = true;
+        }
 
         [Required(ErrorMessage = "Kod aplikacije nije unet")]
         [StringLength(5, ErrorMessage = "Dužina koda aplikacije je 5 karaktera")]

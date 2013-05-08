@@ -1,0 +1,58 @@
+﻿@model Korsinici.Web.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Registracija naloga";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link href="~/Content/account.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/app/register.js"></script>
+}
+
+<div class="content">
+    
+    @if (Model.Logo != null)
+    {
+        <img src="@Url.Content("~/Content/images/logo/" + Model.Logo)" alt="@Model.ApplicationName" />
+    }
+    else
+    {
+        <h1>@Model.ApplicationName</h1>
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.ApplicationCode)    
+        @Html.HiddenFor(x => x.ApplicationName)    
+        @Html.HiddenFor(x => x.Logo)    
+        <div class="line">
+            @Html.TextBoxFor(x => x.Korisnik.KorisnickoIme)    
+        </div>
+        <div class="line">
+            @Html.PasswordFor(x => x.Korisnik.LozinkaPlain)    
+        </div>
+        <div class="line">
+            @Html.TextBoxFor(x => x.Korisnik.Ime)    
+        </div>
+        <div class="line">
+            @Html.TextBoxFor(x => x.Korisnik.Prezime)    
+        </div>
+        <div class="line">
+            @Html.TextBoxFor(x => x.Korisnik.EMail)    
+        </div>
+        
+        if (TempData["Error"] != null)
+        {
+            <p class="errorSummary">@TempData["Error"]</p>
+        }
+        <div class="line">
+            <input type="submit" value="Registruj" id="btnSubmit" />    
+        </div>
+        
+    }
+    
+</div>

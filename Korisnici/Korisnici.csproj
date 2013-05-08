@@ -58,6 +58,7 @@
     <Compile Include="Repository\KorisniciRepository.cs" />
     <Compile Include="Repository\LogoviKorisnikaRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\RepositoryFactory.cs" />
     <Compile Include="Services\Aplikacije.cs" />
     <Compile Include="Services\Korisnici.cs" />
     <Compile Include="Utils\HashUtils.cs" />

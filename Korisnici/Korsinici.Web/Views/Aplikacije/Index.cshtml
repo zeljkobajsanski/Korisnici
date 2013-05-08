@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Aplikacije";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/app/aplikacije.js"></script>
+}
+
+@section styles
+{
+    <style>
+    </style>
+}
+
+@Html.Hidden("getUrl", @Url.Action("VratiAplikacije"))
+@Html.Hidden("updateUrl", @Url.Action("Save"))
+<input type="button" value="Dodaj" id="btnDodaj"/>
+<div id="aplikacijeGrid" class="adminGrid"></div>

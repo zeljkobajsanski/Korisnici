@@ -1,0 +1,11 @@
+﻿<header>
+    <a href="@Url.Action("Index", "Home")">
+        <img src="@Url.Content("~/Content/images/logo/" + ViewBag.Aplikacija.Logo)" alt="@ViewBag.Aplikacija.Naziv" style="vertical-align: middle"/>    
+    </a>
+    <div id="mainMenu">
+        <ul>
+            <li>@Html.ActionLink("Aplikacije", "Index", "Aplikacije")</li>
+            <li>@Html.ActionLink("Korisnički nalozi", "Index", "Korisnici")</li>
+        </ul>
+    </div>
+</header>

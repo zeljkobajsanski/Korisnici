@@ -1,0 +1,41 @@
+﻿@font-face{font-family:'segoe ui';src:local("Segoe UI"),url(SegoeUI.ttf)}
+
+body {
+    font-family: 'segoe ui', arial, sans-serif;
+    width: 1024px;
+    margin: 8px auto 0 auto;
+    background-color: white;
+    min-height: 768px;
+    -webkit-box-shadow: 4px 5px 9px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    4px 5px 9px rgba(50, 50, 50, 0.75);
+    box-shadow:         4px 5px 9px rgba(50, 50, 50, 0.75);
+}
+
+html {
+    background: url('images/back1-light.png') repeat;
+}
+
+input[type=button] {
+    width: 120px;
+    height: 34px;
+    margin: 4px;
+}
+
+.toast-title, .toast-message {
+    font-family: 'segoe ui', arial, sans-serif;
+}
+
+.combobox {
+    width: 320px;
+    height: 34px;
+    margin: 4px;
+}
+
+.adminGrid {
+    margin: 4px;
+}
+
+#mainMenu {
+    display: inline-block !important;
+    float: right;
+}

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<rs.mvc.Korisnici.Model.Aplikacija>
+@{
+    ViewBag.Title = "Korisnički nalozi";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/app/korisnici.js"></script>
+}
+
+@Html.Hidden("VratiAktivneAplikacije", @Url.Action("VratiAktivneAplikacije", "Aplikacije"))
+@Html.Hidden("VratiKorisnike", @Url.Action("VratiKorisnike", "Korisnici"))
+@Html.Hidden("Update", @Url.Action("Update", "Korisnici"))
+@Html.Hidden("aplikacije", Json.Encode(Model))
+
+
+<div id="aplikacijeCombo" class="combobox"></div>
+<div id="korisniciGrid" class="adminGrid"></div>

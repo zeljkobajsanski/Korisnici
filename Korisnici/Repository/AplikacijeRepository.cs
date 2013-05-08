@@ -6,7 +6,15 @@ namespace rs.mvc.Korisnici.Repository
 {
     public class AplikacijeRepository : Repository<Aplikacija>
     {
-         public int? VratiIdAplikacije(string kod)
+        public AplikacijeRepository()
+        {
+        }
+
+        public AplikacijeRepository(DataContext dataContext) : base(dataContext)
+        {
+        }
+
+        public int? VratiIdAplikacije(string kod)
          {
              var aplikacija = DataContext.Aplikacije.SingleOrDefault(x => x.Kod == kod);
              return aplikacija != null ? aplikacija.Id : (int?)null;
