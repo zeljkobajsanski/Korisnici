@@ -17,7 +17,7 @@ namespace rs.mvc.Korisnici.Initializers
                 Kod = "admin",
                 Naziv = "MVC admin",
                 Logo = "adminApp.png",
-                HomeUrl = "http://localhost:49926"
+                HomeUrl = "http://korisnici.azurewebsites.net"
             };
             context.Aplikacije.Add(adminApp);
             var oktopod = new Aplikacija

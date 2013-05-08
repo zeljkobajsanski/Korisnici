@@ -58,5 +58,14 @@ namespace Korsinici.Web.Controllers
             }
            
         }
+
+        public ActionResult VratiAktivneAplikacije()
+        {
+            using (var r = new AplikacijeRepository())
+            {
+                var aplikacije = r.GetActive();
+                return Json(aplikacije, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

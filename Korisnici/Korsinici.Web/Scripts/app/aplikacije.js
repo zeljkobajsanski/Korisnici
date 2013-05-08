@@ -57,7 +57,7 @@
                 { text: 'Aktivan', datafield: 'Aktivan', columntype: 'checkbox', width: 64 }
             ],
             source: dataSource,
-            width: 1014
+            width: MVCAdmin.gridFullWidth
         });
         
 

@@ -22,5 +22,15 @@ namespace rs.mvc.Korisnici.Repository
                            .SingleOrDefault(
                                x => x.KorisnickoIme == korisnickoIme && x.Aplikacije.Any(app => app.Kod == aplikacija));
         }
+
+        public IEnumerable<Korisnik> VratiKorisnike(int? idAplikacije)
+        {
+            var korisnici = DataContext.Korisnici.AsQueryable();
+            if (idAplikacije.HasValue)
+            {
+                korisnici = korisnici.Where(x => x.Aplikacije.Any(app => app.Id == idAplikacije.Value));
+            }
+            return korisnici.ToArray();
+        }
     }
 }

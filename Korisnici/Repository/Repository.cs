@@ -47,6 +47,11 @@ namespace rs.mvc.Korisnici.Repository
             return DataContext.Set<T>().ToArray();
         } 
 
+        public IEnumerable<T> GetActive()
+        {
+            return DataContext.Set<T>().Where(x => x.Aktivan).ToArray();
+        }
+
         public void Save()
         {
             DataContext.SaveChanges();

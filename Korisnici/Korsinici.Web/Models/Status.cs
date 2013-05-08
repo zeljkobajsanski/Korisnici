@@ -4,6 +4,7 @@
     {
         Unchanged,
         Added,
-        Updated
+        Updated,
+        ValidationError
     }
 }

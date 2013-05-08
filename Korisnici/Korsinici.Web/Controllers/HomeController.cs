@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using rs.mvc.Korisnici.Repository;
 
 namespace Korsinici.Web.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         //
@@ -17,5 +17,15 @@ namespace Korsinici.Web.Controllers
             return View();
         }
 
+        public ActionResult GetHeader()
+        {
+            using (var r = new AplikacijeRepository())
+            {
+                var aplikacija = r.VratiAplikaciju("admin");
+                ViewBag.Aplikacija = aplikacija;
+                return PartialView("_Header");
+            }
+            
+        }
     }
 }

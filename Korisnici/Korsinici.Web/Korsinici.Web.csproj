@@ -120,6 +120,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AplikacijeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KorisniciController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -360,6 +361,7 @@
     <Content Include="resources\sortremove.png" />
     <Content Include="Scripts\app\aplikacije.js" />
     <Content Include="Scripts\app\application.js" />
+    <Content Include="Scripts\app\korisnici.js" />
     <Content Include="Scripts\app\register.js" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -378,6 +380,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Korisnici\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,9 +12,13 @@
         <script src="~/Scripts/vendor/jqWidgets/jqx-all.js"></script>
         <script src="~/Scripts/toastr.min.js"></script>
         <script src="~/Scripts/app/application.js"></script>
+        <script>
+            MVCAdmin.init();
+        </script>
         @RenderSection("scripts", false)
     </head>
     <body>
+        @Html.Action("GetHeader", "Home")
         @RenderBody()
     </body>
 </html>
