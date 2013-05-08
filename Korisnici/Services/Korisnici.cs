@@ -12,23 +12,20 @@ namespace rs.mvc.Korisnici.Services
     {
          public static void KreirajKorisnika(Korisnik korisnik, string kodAplikacije)
          {
-             using (var r = new Repository<Korisnik>())
+             using (var r = new RepositoryFactory())
              {
                  var hash = HashUtils.GetHash(korisnik.LozinkaPlain);
                  korisnik.Lozinka = hash;
-                 r.Add(korisnik);
+                 r.KorisniciRepository.Add(korisnik);
                  if (!string.IsNullOrEmpty(kodAplikacije))
                  {
-                     using (var ar = new AplikacijeRepository())
+                     var app = r.AplikacijeRepository.VratiAplikaciju(kodAplikacije);
+                     if (app != null)
                      {
-                         var app = ar.VratiAplikaciju(kodAplikacije);
-                         if (app != null)
-                         {
-                             korisnik.Aplikacije.Add(app);
-                         }
+                         korisnik.Aplikacije.Add(app);
                      }
                  }
-                 r.Save();
+                 r.KorisniciRepository.Save();
              }
          }
 
@@ -38,6 +35,7 @@ namespace rs.mvc.Korisnici.Services
             {
                 var korisnik = r.VratiKorisnika(korisnickoIme, aplikacija);
                 if (korisnik == null) throw new Exception("Korisnik ne postoji");
+                if (!korisnik.Aktivan) throw new Exception("Korisnički nalog nije aktiviran");
                 var pwd = HashUtils.GetHash(lozinka);
                 if (!pwd.SequenceEqual(korisnik.Lozinka)) throw new Exception("Lozinka se ne poklapa");
                 return korisnik;

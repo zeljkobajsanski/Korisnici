@@ -6,6 +6,15 @@ namespace rs.mvc.Korisnici.Repository
 {
     public class KorisniciRepository : Repository<Korisnik>
     {
+        public KorisniciRepository()
+        {
+        }
+
+        public KorisniciRepository(DataContext dataContext) : base(dataContext)
+        {
+            
+        }
+
         public Korisnik VratiKorisnika(string korisnickoIme, string aplikacija)
         {
             return

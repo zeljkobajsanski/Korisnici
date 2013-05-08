@@ -9,6 +9,9 @@ namespace rs.mvc.Korisnici.Initializers
         protected override void Seed(DataContext context)
         {
             base.Seed(context);
+            context.Database.ExecuteSqlCommand(
+                "ALTER TABLE KorisnickiNalozi ADD CONSTRAINT jedinstveno_korisnicko_ime UNIQUE (KorisnickoIme)");
+
             var adminApp = new Aplikacija
             {
                 Kod = "admin",
@@ -33,6 +36,7 @@ namespace rs.mvc.Korisnici.Initializers
                 Prezime = "Bajšanski",
                 Administrator = true,
                 Lozinka = HashUtils.GetHash("Z3ks_J0va"),
+                Aktivan = true
             };
             zeks.Aplikacije.Add(adminApp);
             zeks.Aplikacije.Add(oktopod);
