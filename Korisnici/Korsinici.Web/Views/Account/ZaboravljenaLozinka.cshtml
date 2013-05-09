@@ -47,11 +47,11 @@
     }
     @if (aplikacija.Logo != null)
     {
-        <img src="@Url.Content("~/Content/images/logo/" + aplikacija.Logo)" alt="@aplikacija.Naziv" />
+        <a href="@aplikacija.HomeUrl"><img src="@Url.Content("~/Content/images/logo/" + aplikacija.Logo)" alt="@aplikacija.Naziv" /></a>
     }
     else
     {
-        <h1>@aplikacija.Naziv</h1>
+        <a href="@aplikacija.HomeUrl"><h1>@aplikacija.Naziv</h1></a>
     }
     
     @using (Ajax.BeginForm("ResetujLozinku", new AjaxOptions(){OnFailure = "error", OnSuccess = "success"}))
