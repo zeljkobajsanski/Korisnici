@@ -2,6 +2,7 @@
     ViewBag.Title = "Moj Profil";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using rs.mvc.Korisnici.Model
 @model rs.mvc.Korisnici.Model.Korisnik
 
 @section styles
@@ -21,13 +22,25 @@
 }
 
 <div class="content">
-    <div class="line">
-        <a href="javascript:history.go(-1);">&lt;&lt; Nazad</a>
-    </div>
+    @{
+        var aplikacija = ViewBag.Aplikacija as Aplikacija;
+        if (aplikacija != null)
+        {
+            if (aplikacija.Logo != null)
+            {
+                <img src="@Url.Content("~/Content/images/logo/" + aplikacija.Logo)" alt="@aplikacija.Naziv" />
+            }
+            else
+            {
+                <h1>@aplikacija.Naziv</h1>
+            }        
+        }
+    }
+    
     <div id="profileData">
         <div>Podaci o nalogu</div>
         <div>
-            @using (Html.BeginForm("MojProfil", "Account", FormMethod.Post, new {id = "profile"}))
+            @using (Html.BeginForm("MojProfil", "Account", FormMethod.Post, new { id = "profile" }))
             {
                 @Html.HiddenFor(x => x.Id)
                 <div class="line">
@@ -41,7 +54,7 @@
                     @Html.TextBoxFor(x => x.Prezime)    
                 </div>
                 <div class="line">
-                    @Html.TextBoxFor(x => x.EMail, new {@type="email"})    
+                    @Html.TextBoxFor(x => x.EMail, new { @type = "email" })    
                 </div>
                 @Html.ValidationSummary()
                 if (TempData["Error"] != null)
@@ -57,11 +70,11 @@
     <div id="lozinkaData">
         <div>Lozinka</div>
         <div>
-            @using(Ajax.BeginForm("PromeniLozinku", new object(), new AjaxOptions
+            @using (Ajax.BeginForm("PromeniLozinku", new object(), new AjaxOptions
             {
                 OnComplete = "MVCAdmin.success('Vaša lozinka je promenjena')",
                 OnFailure = "MVCAdmin.error('Promena lozinke nije uspela!')",
-            }, new {id="lozinkaForm"}))
+            }, new { id = "lozinkaForm" }))
             {
                 @Html.HiddenFor(x => x.Id)
                 <div class="line">

@@ -82,7 +82,8 @@ namespace Korsinici.Web.Controllers
                 {
                     KorisnickoIme =  korisnik.KorisnickoIme,
                     Korisnik = korisnik.Ime + " " + korisnik.Prezime,
-                    Administrator = korisnik.Administrator
+                    Administrator = korisnik.Administrator,
+                    AppCode = aplikacija.Kod
                 }));
                 Response.Cookies.Add(korisnikCookie);
                 var url = aplikacija.HomeUrl;
@@ -132,20 +133,26 @@ namespace Korsinici.Web.Controllers
             return RedirectToAction("Login", new{appcode = "admin"});
         }
 
-        public ActionResult MojProfil(string verificationKey)
+        public ActionResult MojProfil(string appCode, string verificationKey)
         {
             if (!string.IsNullOrEmpty(verificationKey))
             {
-                using (var r = new KorisniciRepository())
+                using (var r = new RepositoryFactory())
                 {
-                    var korisnik = r.VratiKorisnikaPoTmpPasswordu(verificationKey);
+                    var korisnik = r.KorisniciRepository.VratiKorisnikaPoTmpPasswordu(verificationKey);
                     if (korisnik == null) return HttpNotFound("Korisnik nije pronađen");
+                    if (appCode != null)
+                    {
+                        var aplikacija = r.AplikacijeRepository.VratiAplikaciju(appCode);
+                        ViewBag.Aplikacija = aplikacija;
+                    }
                     return View(korisnik);
                 }
             }
             var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
             {
+                
                 var formsAuthenticationTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 if (formsAuthenticationTicket != null)
                 {
@@ -153,9 +160,17 @@ namespace Korsinici.Web.Controllers
                     int id;
                     if (Int32.TryParse(value, out id))
                     {
-                        using (var r = new KorisniciRepository())
+                        using (var r = new RepositoryFactory())
                         {
-                            var korisnik = r.Get(id);
+                            var korisnik = r.KorisniciRepository.Get(id);
+                            var korisnikCookie = Request.Cookies["korisnici_korisnik"];
+                            if (korisnikCookie != null)
+                            {
+                                var jss = new JavaScriptSerializer();
+                                var korisnikData = jss.Deserialize<KorisnikCookie>(korisnikCookie.Value);
+                                var aplikacija = r.AplikacijeRepository.VratiAplikaciju(korisnikData.AppCode);
+                                ViewBag.Aplikacija = aplikacija;
+                            }
                             return View(korisnik);
                         }
                     }
@@ -216,13 +231,19 @@ namespace Korsinici.Web.Controllers
             return new EmptyResult();
         }
 
-        public ActionResult ZaboravljenaLozinka()
+        public ActionResult ZaboravljenaLozinka(string appCode)
         {
-            return View();
+            using (var r = new AplikacijeRepository())
+            {
+                var aplikacija = r.VratiAplikaciju(appCode);
+                ViewBag.Aplikacija = aplikacija;
+                return View(); 
+            }
+            
         }
 
         [HttpPost]
-        public ActionResult ZaboravljenaLozinka(string email)
+        public ActionResult ResetujLozinku(string email, string appCode)
         {
             using (var r = new KorisniciRepository())
             {
@@ -236,6 +257,7 @@ namespace Korsinici.Web.Controllers
                     {
                         ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, "RecoveryPasswordEmail");
                         ViewData["Korisnik"] = korisnik;
+                        ViewData["AppCode"] = appCode;
                         var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
                         viewResult.View.Render(viewContext, sw);
                         var emailBody = sw.GetStringBuilder().ToString();
