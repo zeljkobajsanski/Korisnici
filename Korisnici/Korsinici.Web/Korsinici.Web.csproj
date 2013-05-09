@@ -140,6 +140,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\account.css" />
     <Content Include="Content\application.css" />
+    <Content Include="Content\images\android-icon.png" />
     <Content Include="Content\images\arrow_bottom.png" />
     <Content Include="Content\images\arrow_left.png" />
     <Content Include="Content\images\arrow_right.png" />

@@ -239,8 +239,13 @@ namespace Korsinici.Web.Controllers
                         var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
                         viewResult.View.Render(viewContext, sw);
                         var emailBody = sw.GetStringBuilder().ToString();
-                        var mailMessage = new MailMessage("zeljko.bajanski@gmail.com", korisnik.EMail) {IsBodyHtml = true, Body = emailBody};
-                        smtp.SendAsync(mailMessage, null);
+                        var mailMessage = new MailMessage("zeljko.bajanski@gmail.com", korisnik.EMail)
+                        {
+                            IsBodyHtml = true,
+                            Body = emailBody,
+                            Subject = "Zahtev za promenu lozinke"
+                        };
+                        smtp.Send(mailMessage);
                     }
                 }
             }

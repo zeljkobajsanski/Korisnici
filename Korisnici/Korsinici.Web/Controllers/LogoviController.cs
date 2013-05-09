@@ -47,6 +47,7 @@ namespace Korsinici.Web.Controllers
             if (browser.ToLower().Contains("msie")) return "MSIE";
             if (browser.ToLower().Contains("firefox")) return "Firefox";
             if (browser.ToLower().Contains("opera")) return "Opera";
+            if (browser.ToLower().Contains("android")) return "Android";
 
             return browser;
         }

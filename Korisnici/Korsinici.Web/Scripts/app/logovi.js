@@ -9,6 +9,7 @@
         self.aplikacijeCombo = $("#aplikacijeCombo");
         self.logoviGrid = $("#logovi");
         self.viewmodel = JSON.parse($("#viewmodel").val());
+        var btnRefresh = $("#btnRefresh");
 
         self.odDatuma.jqxDateTimeInput({ theme: MVCAdmin.defaultTheme, formatString: 'dd.MM.yyyy' });
 
@@ -23,6 +24,8 @@
             placeHolder: 'Filtriraj po aplikaciji...'
         });
 
+        btnRefresh.jqxButton({ theme: MVCAdmin.defaultTheme });
+
         self.logoviGrid.jqxGrid({
             theme: MVCAdmin.defaultTheme,
             width: MVCAdmin.gridFullWidth,
@@ -32,7 +35,7 @@
                 { text: 'IP Adresa', datafield: 'IpAdresa'},
                 { text: 'Browser', datafield: 'Browser', cellsrenderer: _renderujBrowser, width: 48},
                 { text: 'Vreme Prijave', datafield: 'DatumPrijave', cellsformat: 'dd.MM.yyyy HH:mm'},
-                { text: 'Poslednja Aktivnost', datafield: 'VremePoslednjeAktivnosti', cellsformat: 'dd.MM.yyyy HH:mm' },
+                { text: 'Poslednja Aktivnost', datafield: 'VremePoslednjeAktivnosti', cellsformat: 'dd.MM.yyyy HH:mm:ss' },
                 { text: 'Online', datafield: 'VremeNeaktivnosti', cellsrenderer: _renderujOnlineStatus, width: 48 }
             ],
             pageable: true
@@ -44,6 +47,7 @@
         self.odDatuma.on('valuechanged', self.OsveziLogove);
         self.doDatuma.on('valuechanged', self.OsveziLogove);
         self.aplikacijeCombo.on('change', self.OsveziLogove);
+        btnRefresh.on('click', self.OsveziLogove);
     });
     
     self.OsveziLogove = function() {
@@ -93,6 +97,8 @@
             src = '/Content/images/ie.png';
         } else if (cell === 'Opera') {
             src = '/Content/images/opera.png';
+        } else if (cell === 'Android') {
+            src = '/Content/images/android-icon.png';
         }
         return '<img src="' + src + '" alt="" style="padding: 4px 0 0 16px" />';
     }

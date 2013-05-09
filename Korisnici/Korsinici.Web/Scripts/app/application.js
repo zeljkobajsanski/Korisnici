@@ -14,6 +14,9 @@
     warning: function (message) {
         toastr.warning(message, 'MVC Admin - Upozorenje', { positionClass: 'toast-bottom-full-width' });
     },
+    info: function (message) {
+        toastr.info(message, 'MVC Admin - Info', { positionClass: 'toast-bottom-full-width' });
+    },
     poruke: {
         podaciSuSacuvani : function() {
             toastr.success('Podaci su sačuvani', 'MVC Admin - Ok', { positionClass: 'toast-bottom-full-width' });

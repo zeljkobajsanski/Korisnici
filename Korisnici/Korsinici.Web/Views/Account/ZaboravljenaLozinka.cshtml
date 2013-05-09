@@ -19,6 +19,7 @@
                 $("p.errorSummary").text("Promena lozinke nije uspela: " + response.Message);
             } else if (response.Status == 4) {
                 $("p.errorSummary").text('');
+                MVCAdmin.info(response.Message);
             }
         }
         $(function() {
