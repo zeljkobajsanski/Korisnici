@@ -6,6 +6,14 @@
         <ul>
             <li>@Html.ActionLink("Aplikacije", "Index", "Aplikacije")</li>
             <li>@Html.ActionLink("Korisnički nalozi", "Index", "Korisnici")</li>
+            <li>@Html.ActionLink("Logovi", "Index", "Logovi")</li>
+            <li>@ViewBag.Korisnik
+                <ul>
+                    <li>@Html.ActionLink("Moj Profil", "MojProfil", "Account")</li>
+                    <li>@Html.ActionLink("Odjavi me", "Logout", "Account")</li>
+                </ul>
+            </li>
         </ul>
     </div>
+    <br style="clear: both"/>
 </header>

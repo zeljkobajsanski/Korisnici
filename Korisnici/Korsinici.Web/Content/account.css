@@ -46,7 +46,7 @@ p.errorSummary, ul {
     padding: 0;
 }
 
-input[type=text].jqx-input, input[type=password].jqx-input {
+input[type=text].jqx-input, input[type=password].jqx-input, input[type=email] {
     width: 320px;
     height: 24px;
     padding: 4px;

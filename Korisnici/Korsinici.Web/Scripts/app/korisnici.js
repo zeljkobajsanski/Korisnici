@@ -29,7 +29,8 @@
 				{ text: 'Ime', editable: true, datafield: 'Ime', width: 120 },
 				{ text: 'Prezime', editable: true, datafield: 'Prezime' },
 				{ text: 'E-mail', editable: true, datafield: 'EMail' },
-				{ text: 'Aktivan', editable: true, datafield: 'Aktivan', columntype: 'checkbox', width: 64 }
+				{ text: 'Aktivan', editable: true, datafield: 'Aktivan', columntype: 'checkbox', width: 64 },
+				{ text: 'Admin', editable: true, datafield: 'Administrator', columntype: 'checkbox', width: 64 },
 			],
 			width: MVCAdmin.gridFullWidth
 		});

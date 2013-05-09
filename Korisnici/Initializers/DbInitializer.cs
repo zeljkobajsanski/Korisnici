@@ -11,6 +11,8 @@ namespace rs.mvc.Korisnici.Initializers
             base.Seed(context);
             context.Database.ExecuteSqlCommand(
                 "ALTER TABLE KorisnickiNalozi ADD CONSTRAINT jedinstveno_korisnicko_ime UNIQUE (KorisnickoIme)");
+            context.Database.ExecuteSqlCommand(
+                "ALTER TABLE KorisnickiNalozi ADD CONSTRAINT jedinstven_email UNIQUE (EMail)");
 
             var adminApp = new Aplikacija
             {

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Moj Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model rs.mvc.Korisnici.Model.Korisnik
+
+@section styles
+{
+    <link href="~/Content/account.css" rel="stylesheet" />
+    <style>
+        #profileData, #lozinkaData {
+            min-width: 340px;
+        }
+    </style>
+}
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/app/mojprofil.js"></script>
+}
+
+<div class="content">
+    <div class="line">
+        <a href="javascript:history.go(-1);">&lt;&lt; Nazad</a>
+    </div>
+    <div id="profileData">
+        <div>Podaci o nalogu</div>
+        <div>
+            @using (Html.BeginForm("MojProfil", "Account", FormMethod.Post, new {id = "profile"}))
+            {
+                @Html.HiddenFor(x => x.Id)
+                <div class="line">
+                    @Html.TextBoxFor(x => x.KorisnickoIme)    
+                </div>
+        
+                <div class="line">
+                    @Html.TextBoxFor(x => x.Ime)    
+                </div>
+                <div class="line">
+                    @Html.TextBoxFor(x => x.Prezime)    
+                </div>
+                <div class="line">
+                    @Html.TextBoxFor(x => x.EMail, new {@type="email"})    
+                </div>
+                @Html.ValidationSummary()
+                if (TempData["Error"] != null)
+                {
+                    <p class="errorSummary">@TempData["Error"]</p>
+                }
+                <div class="line">
+                    <input type="submit" value="Sačuvaj" id="btnSubmit" />    
+                </div>
+            }
+        </div>
+    </div>
+    <div id="lozinkaData">
+        <div>Lozinka</div>
+        <div>
+            @using(Ajax.BeginForm("PromeniLozinku", new object(), new AjaxOptions
+            {
+                OnComplete = "MVCAdmin.success('Vaša lozinka je promenjena')",
+                OnFailure = "MVCAdmin.error('Promena lozinke nije uspela!')",
+            }, new {id="lozinkaForm"}))
+            {
+                @Html.HiddenFor(x => x.Id)
+                <div class="line">
+                    <input type="password" id="novaLozinka" name="novaLozinka"/>    
+                </div>
+                <div class="line">
+                    <input type="password" id="potvrdaLozinke" />    
+                </div>
+                <div class="line">
+                    <input type="submit" value="Promeni" id="btnPromeniLozinku" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="line">
+        <a href="javascript:history.go(-1);">&lt;&lt; Nazad</a>
+    </div>
+</div>
+
+@if (TempData["Status"] != null)
+{
+    <script>
+        MVCAdmin.poruke.podaciSuSacuvani();
+    </script>
+}

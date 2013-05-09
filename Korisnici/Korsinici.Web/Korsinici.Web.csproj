@@ -121,13 +121,17 @@
     <Compile Include="Controllers\AplikacijeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
+    <Compile Include="Controllers\LogoviController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UrlExtensions.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\LogoviViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,12 +164,16 @@
     <Content Include="Content\images\black_gradient.png" />
     <Content Include="Content\images\bootstrap\glyphicons-halflings-white.png" />
     <Content Include="Content\images\bootstrap\glyphicons-halflings.png" />
+    <Content Include="Content\images\bullet_green.png" />
+    <Content Include="Content\images\bullet_red.png" />
+    <Content Include="Content\images\bullet_yellow.png" />
     <Content Include="Content\images\check_black.png" />
     <Content Include="Content\images\check_disabled.png" />
     <Content Include="Content\images\check_indeterminate_black.png" />
     <Content Include="Content\images\check_indeterminate_disabled.png" />
     <Content Include="Content\images\check_indeterminate_white.png" />
     <Content Include="Content\images\check_white.png" />
+    <Content Include="Content\images\chrome.png" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\images\close_white.png" />
     <Content Include="Content\images\crosshair-white.png" />
@@ -185,6 +193,8 @@
     <Content Include="Content\images\darkness\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\images\darkness\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\images\darkred_gradient.png" />
+    <Content Include="Content\images\errorRedDot.png" />
+    <Content Include="Content\images\firefox.png" />
     <Content Include="Content\images\icon-down-white.png" />
     <Content Include="Content\images\icon-down.png" />
     <Content Include="Content\images\icon-left-white.png" />
@@ -193,6 +203,7 @@
     <Content Include="Content\images\icon-right.png" />
     <Content Include="Content\images\icon-up-white.png" />
     <Content Include="Content\images\icon-up.png" />
+    <Content Include="Content\images\ie.png" />
     <Content Include="Content\images\le-frog\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
     <Content Include="Content\images\le-frog\ui-bg_diagonals-thick_15_444444_40x40.png" />
     <Content Include="Content\images\le-frog\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
@@ -242,6 +253,7 @@
     <Content Include="Content\images\office-icon-left.png" />
     <Content Include="Content\images\office-icon-right.png" />
     <Content Include="Content\images\office-icon-up.png" />
+    <Content Include="Content\images\opera.png" />
     <Content Include="Content\images\overcast\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\overcast\ui-bg_flat_0_eeeeee_40x100.png" />
     <Content Include="Content\images\overcast\ui-bg_flat_55_c0402a_40x100.png" />
@@ -316,6 +328,7 @@
     <Content Include="Content\images\start\ui-icons_fcd113_256x240.png" />
     <Content Include="Content\images\star_disabled.png" />
     <Content Include="Content\images\star_hover.png" />
+    <Content Include="Content\images\successGreenDot.png" />
     <Content Include="Content\images\sunny\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
     <Content Include="Content\images\sunny\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\images\sunny\ui-bg_flat_50_5c5c5c_40x100.png" />
@@ -337,6 +350,7 @@
     <Content Include="Content\images\track_darkblue.png" />
     <Content Include="Content\images\track_shinyblack.png" />
     <Content Include="Content\images\track_summer.png" />
+    <Content Include="Content\images\warningOrangeDot.png" />
     <Content Include="Content\jqx.base.css" />
     <Content Include="Content\jqx.bootstrap.css" />
     <Content Include="Content\jqx.metro.css" />
@@ -362,16 +376,23 @@
     <Content Include="Scripts\app\aplikacije.js" />
     <Content Include="Scripts\app\application.js" />
     <Content Include="Scripts\app\korisnici.js" />
+    <Content Include="Scripts\app\logovi.js" />
+    <Content Include="Scripts\app\mojprofil.js" />
     <Content Include="Scripts\app\register.js" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\vendor\jqWidgets\globalize.culture.sr-Latn.js" />
+    <Content Include="Scripts\vendor\jqWidgets\globalize.js" />
     <Content Include="Scripts\vendor\jqWidgets\jqx-all.js" />
     <Content Include="Scripts\vendor\jqWidgets\jqxbuttons.js" />
     <Content Include="Scripts\vendor\jqWidgets\jqxcore.js" />
     <Content Include="Scripts\vendor\jqWidgets\jqxinput.js" />
+    <Content Include="Scripts\vendor\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -382,6 +403,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Korisnici\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Logovi\Index.cshtml" />
+    <Content Include="Views\Account\MojProfil.cshtml" />
+    <Content Include="Views\Account\ZaboravljenaLozinka.cshtml" />
+    <Content Include="Views\Account\RecoveryPasswordEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

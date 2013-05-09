@@ -44,7 +44,7 @@
         <div class="line">
             @Html.TextBoxFor(x => x.Korisnik.EMail)    
         </div>
-        
+        @Html.ValidationSummary()
         if (TempData["Error"] != null)
         {
             <p class="errorSummary">@TempData["Error"]</p>

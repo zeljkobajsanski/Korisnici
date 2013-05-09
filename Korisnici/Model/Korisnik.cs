@@ -38,5 +38,7 @@ namespace rs.mvc.Korisnici.Model
         public IList<Aplikacija> Aplikacije { get; set; }
 
         public bool Administrator { get; set; }
+
+        public string TemporaryPassword { get; set; }
     }
 }

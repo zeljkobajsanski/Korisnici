@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using rs.mvc.Korisnici.Filters;
 using rs.mvc.Korisnici.Repository;
+using rs.mvc.Korisnici.Utils;
 
 namespace Korsinici.Web.Controllers
 {
+    [Authorize]
+    [LogujAktivnost]
     public class HomeController : Controller
     {
         //
@@ -23,6 +28,15 @@ namespace Korsinici.Web.Controllers
             {
                 var aplikacija = r.VratiAplikaciju("admin");
                 ViewBag.Aplikacija = aplikacija;
+                ViewBag.Korisnik = "";
+                var korisnikCookie = Request.Cookies["korisnici_korisnik"];
+                if (korisnikCookie != null)
+                {
+                    var jss = new JavaScriptSerializer();
+                    var korisnik = jss.Deserialize<KorisnikCookie>(korisnikCookie.Value);
+                    ViewBag.Korisnik = korisnik.Korisnik;
+                }
+                
                 return PartialView("_Header");
             }
             

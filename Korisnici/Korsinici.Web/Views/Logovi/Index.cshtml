@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Pregled logova";
+}
+@model Korsinici.Web.ViewModels.LogoviViewModel
+
+@section scripts
+{
+    <script src="~/Scripts/vendor/moment.min.js"></script>
+    <script src="~/Scripts/app/logovi.js"></script>
+}
+@Html.Hidden("viewmodel", Json.Encode(Model))
+@Html.Hidden("VratiLogove", @Url.Action("VratiLogove"))
+
+<div id="odDatuma" class="combobox"></div>
+<div id="doDatuma" class="combobox"></div>
+<div id="aplikacijeCombo" class="combobox"></div>
+<div id="logovi" class="adminGrid"></div>

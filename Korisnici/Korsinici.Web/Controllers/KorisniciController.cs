@@ -46,10 +46,8 @@ namespace Korsinici.Web.Controllers
                 k.Prezime = korisnik.Prezime;
                 k.EMail = korisnik.EMail;
                 k.Aktivan = korisnik.Aktivan;
-                //if (!TryValidateModel(k))
-                //{
-                //    return Json(Status.ValidationError);
-                //}
+                k.Administrator = korisnik.Administrator;
+       
                 if (!Validator.TryValidateObject(k, new ValidationContext(k, null, new Dictionary<object, object>()), new Collection<ValidationResult>()))
                 {
                     return Json(Status.ValidationError);

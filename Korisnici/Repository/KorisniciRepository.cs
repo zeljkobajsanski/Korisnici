@@ -32,5 +32,15 @@ namespace rs.mvc.Korisnici.Repository
             }
             return korisnici.ToArray();
         }
+
+        public Korisnik VratiKorisnika(string email)
+        {
+            return DataContext.Korisnici.SingleOrDefault(x => x.EMail == email);
+        }
+
+        public Korisnik VratiKorisnikaPoTmpPasswordu(string temporaryPassword)
+        {
+            return DataContext.Korisnici.SingleOrDefault(x => x.TemporaryPassword == temporaryPassword);
+        }
     }
 }

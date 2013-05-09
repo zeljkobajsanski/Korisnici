@@ -62,6 +62,7 @@
     <Compile Include="Services\Aplikacije.cs" />
     <Compile Include="Services\Korisnici.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\KorisnikCookie.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

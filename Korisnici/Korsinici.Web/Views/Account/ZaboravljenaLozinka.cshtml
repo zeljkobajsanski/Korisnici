@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Zaboravljena lozinka";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link href="~/Content/account.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function error(err, xhr, status) {
+            $("p.errorSummary").text("Promena lozinke nije uspela");
+        }
+        function success(response) {
+            if (response.Status == 5) {
+                $("p.errorSummary").text("Promena lozinke nije uspela: " + response.Message);
+            } else if (response.Status == 4) {
+                $("p.errorSummary").text('');
+            }
+        }
+        $(function() {
+            $("#email").jqxInput({ theme: MVCAdmin.defaultTheme, placeHolder: 'Unesite registrovani e-mail za vaš nalog' });
+            $("#btnSubmit").jqxButton({ theme: MVCAdmin.defaultTheme });
+            var form = $("form");
+            form.jqxValidator({
+                hintType: 'label',
+                rules: [
+                    { input: '#email', message: 'Unesite e-mail', rule: 'required'},
+                    { input: '#email', message: 'E-mail nije ispravan', rule: 'email'}
+                ]
+            });
+            form.submit(function() {
+                return form.jqxValidator('validate');
+            });
+        })
+    </script>
+}
+
+<div class="content">
+      <div class="line">
+        <a href="javascript:history.go(-1);">&lt;&lt; Nazad</a>
+    </div>
+    @using (Ajax.BeginForm(new AjaxOptions(){OnFailure = "error", OnSuccess = "success"}))
+    {
+        <div class="line">
+            <input type="email" id="email" name="email" />
+        </div>    
+        <div class="line">
+            <input type="submit" value="Resetuj lozinku" id="btnSubmit" />
+        </div>
+        <p class="errorSummary"></p>
+    } 
+     
+</div>
+
+
