@@ -19,7 +19,8 @@ namespace rs.mvc.Korisnici.Initializers
                 Kod = "admin",
                 Naziv = "MVC admin",
                 Logo = "adminApp.png",
-                HomeUrl = "http://korisnici.azurewebsites.net"
+                HomeUrl = "http://korisnici.azurewebsites.net",
+                Domain = "azurewebsites.net"
             };
             context.Aplikacije.Add(adminApp);
             var oktopod = new Aplikacija
@@ -27,7 +28,8 @@ namespace rs.mvc.Korisnici.Initializers
                 Kod = "rvms",
                 Naziv = "Oktopod",
                 Logo = "oktopod.png",
-                HomeUrl = "http://rvms.azurewebsites.net"
+                HomeUrl = "http://rvms.azurewebsites.net",
+                Domain = "azurewebsites.net"
             };
             context.Aplikacije.Add(oktopod);
             var zeks = new Korisnik

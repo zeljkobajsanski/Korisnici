@@ -19,6 +19,7 @@
                 { name: 'Kod' },
                 { name: 'Naziv' },
                 { name: 'HomeUrl' },
+                { name: 'Domain' },
                 { name: 'Logo' },
                 { name: 'Aktivan', type: 'bool' }
                 
@@ -53,6 +54,7 @@
                 { text: 'Kod', datafield: 'Kod', validation: _required },
                 { text: 'Naziv aplikacije', datafield: 'Naziv', validation: _required },
                 { text: 'Home URL', datafield: 'HomeUrl', validation: _required },
+                { text: 'Domen', datafield: 'Domain'},
                 { text: 'Logo', datafield: 'Logo' },
                 { text: 'Aktivan', datafield: 'Aktivan', columntype: 'checkbox', width: 64 }
             ],

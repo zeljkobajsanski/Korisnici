@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using rs.mvc.Korisnici.Filters;
 using rs.mvc.Korisnici.Repository;
+using rs.mvc.Korisnici.Services;
 using rs.mvc.Korisnici.Utils;
 
 namespace Korsinici.Web.Controllers
@@ -28,18 +29,10 @@ namespace Korsinici.Web.Controllers
             {
                 var aplikacija = r.VratiAplikaciju("admin");
                 ViewBag.Aplikacija = aplikacija;
-                ViewBag.Korisnik = "";
-                var korisnikCookie = Request.Cookies["korisnici_korisnik"];
-                if (korisnikCookie != null)
-                {
-                    var jss = new JavaScriptSerializer();
-                    var korisnik = jss.Deserialize<KorisnikCookie>(korisnikCookie.Value);
-                    ViewBag.Korisnik = korisnik.Korisnik;
-                }
-                
+                var korisnik = Cookies.VratiKorisnikaIzKukija(Request);
+                ViewBag.Korisnik = korisnik != null ? korisnik.Korisnik : "";
                 return PartialView("_Header");
             }
-            
         }
     }
 }

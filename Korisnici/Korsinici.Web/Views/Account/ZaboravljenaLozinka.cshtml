@@ -53,14 +53,15 @@
     {
         <a href="@aplikacija.HomeUrl"><h1>@aplikacija.Naziv</h1></a>
     }
-    
-    @using (Ajax.BeginForm("ResetujLozinku", new AjaxOptions(){OnFailure = "error", OnSuccess = "success"}))
+    <img src="@Url.Content("~/resources/loader.gif")" alt="" style="float: right; padding-top: 16px; display: none" id="loader" />
+    @using (Ajax.BeginForm("ResetujLozinku", new AjaxOptions(){OnFailure = "error", OnSuccess = "success", LoadingElementId = "loader"}))
     {
         @Html.Hidden("appCode", aplikacija.Kod)
         <div class="line">
             <input type="email" id="email" name="email" />
         </div>    
         <div class="line">
+            
             <input type="submit" value="Resetuj lozinku" id="btnSubmit" />
         </div>
         <p class="errorSummary"></p>

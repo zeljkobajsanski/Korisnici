@@ -25,5 +25,7 @@ namespace rs.mvc.Korisnici.Model
         [Required(ErrorMessage = "Url aplikacije nije unet")]
         [StringLength(256, ErrorMessage = "Dužina url-a je najviše 256 karaktera")]
         public string HomeUrl { get; set; }
+
+        public string Domain { get; set; }
     }
 }

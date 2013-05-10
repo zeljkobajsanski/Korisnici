@@ -72,11 +72,12 @@ namespace Korsinici.Web.Controllers
                 }
 
                 var cookie = FormsAuthentication.GetAuthCookie(korisnik.KorisnickoIme, false);
+                cookie.Domain = aplikacija.Domain;
                 var ticket = new FormsAuthenticationTicket(1, korisnik.KorisnickoIme, DateTime.Now, DateTime.Now.AddMonths(6), false, korisnik.Id.ToString());
                 cookie.Value = FormsAuthentication.Encrypt(ticket);
                 Response.Cookies.Add(cookie);
                 var ser = new JavaScriptSerializer();
-                var idLogaCookie = new HttpCookie("korisnici_idLoga", log.Id.ToString());
+                var idLogaCookie = new HttpCookie("korisnici_idLoga", log.Id.ToString()){Domain = aplikacija.Domain};
                 Response.Cookies.Add(idLogaCookie);
                 var korisnikCookie = new HttpCookie("korisnici_korisnik", ser.Serialize(new KorisnikCookie()
                 {
@@ -85,6 +86,7 @@ namespace Korsinici.Web.Controllers
                     Administrator = korisnik.Administrator,
                     AppCode = aplikacija.Kod
                 }));
+                korisnikCookie.Domain = aplikacija.Domain;
                 Response.Cookies.Add(korisnikCookie);
                 var url = aplikacija.HomeUrl;
                 return RedirectPermanent(url);
@@ -245,19 +247,19 @@ namespace Korsinici.Web.Controllers
         [HttpPost]
         public ActionResult ResetujLozinku(string email, string appCode)
         {
-            using (var r = new KorisniciRepository())
+            using (var r = new RepositoryFactory())
             {
-                var korisnik = r.VratiKorisnika(email);
+                var korisnik = r.KorisniciRepository.VratiKorisnika(email);
                 if (korisnik == null) return Json(new {Status = Status.Error, Message = "Korisnik nije pronađen"});
                 korisnik.TemporaryPassword = Guid.NewGuid().ToString("N");
-                r.Save();
+                r.KorisniciRepository.Save();
                 using (var smtp = new SmtpClient())
                 {
                      using (var sw = new StringWriter())
                     {
                         ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, "RecoveryPasswordEmail");
                         ViewData["Korisnik"] = korisnik;
-                        ViewData["AppCode"] = appCode;
+                        ViewData["Application"] = r.AplikacijeRepository.VratiAplikaciju(appCode);
                         var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
                         viewResult.View.Render(viewContext, sw);
                         var emailBody = sw.GetStringBuilder().ToString();

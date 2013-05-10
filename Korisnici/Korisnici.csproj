@@ -33,11 +33,15 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,6 +64,7 @@
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\RepositoryFactory.cs" />
     <Compile Include="Services\Aplikacije.cs" />
+    <Compile Include="Services\Cookies.cs" />
     <Compile Include="Services\Korisnici.cs" />
     <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Utils\KorisnikCookie.cs" />
