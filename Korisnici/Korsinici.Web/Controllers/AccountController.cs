@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -267,7 +268,8 @@ namespace Korsinici.Web.Controllers
                         {
                             IsBodyHtml = true,
                             Body = emailBody,
-                            Subject = "Zahtev za promenu lozinke"
+                            Subject = "Zahtev za promenu lozinke",
+                            BodyEncoding = Encoding.UTF8
                         };
                         smtp.Send(mailMessage);
                     }
