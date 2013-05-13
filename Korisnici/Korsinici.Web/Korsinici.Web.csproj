@@ -138,8 +138,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="favicon.png" />
     <Content Include="Content\account.css" />
     <Content Include="Content\application.css" />
+    <Content Include="Content\images\admin.png" />
     <Content Include="Content\images\android-icon.png" />
     <Content Include="Content\images\arrow_bottom.png" />
     <Content Include="Content\images\arrow_left.png" />
