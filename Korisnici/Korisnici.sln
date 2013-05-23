@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korisnici.ConsoleAdmin", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korsinici.Web", "Korsinici.Web\Korsinici.Web.csproj", "{E444144A-F570-42A9-8602-69923B2D7146}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korisnici.ClientLibrary", "..\Korisnici.ClientLibrary\Korisnici.ClientLibrary.csproj", "{105E467E-515E-4333-82DB-1071C927F422}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{E444144A-F570-42A9-8602-69923B2D7146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E444144A-F570-42A9-8602-69923B2D7146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E444144A-F570-42A9-8602-69923B2D7146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{105E467E-515E-4333-82DB-1071C927F422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105E467E-515E-4333-82DB-1071C927F422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105E467E-515E-4333-82DB-1071C927F422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105E467E-515E-4333-82DB-1071C927F422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

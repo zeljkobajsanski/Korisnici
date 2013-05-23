@@ -17,6 +17,8 @@ namespace rs.mvc.Korisnici.Model
 
         public DateTime VremePoslednjeAktivnosti { get; set; }
 
+        public DateTime? VremeOdjave { get; set; }
+
         public string IpAdresa { get; set; }
 
         public string Browser { get; set; }

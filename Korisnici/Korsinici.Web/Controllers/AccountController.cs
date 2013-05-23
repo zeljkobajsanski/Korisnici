@@ -53,23 +53,14 @@ namespace Korsinici.Web.Controllers
             }
             try
             {
-                var korisnik = Korisnici.PrijaviKorisnika(model.User.Username, model.User.Password, model.User.Application);
-                var log = new Log
-                {
-                    KorisnickoIme = korisnik.KorisnickoIme,
-                    DatumPrijave = DateTime.Now,
-                    VremePoslednjeAktivnosti = DateTime.Now
-                };
+                var korisnik = Korisnici.ProveriKorisnika(model.User.Username, model.User.Password, model.User.Application);
+                var log = Korisnici.PrijaviKorisnika(korisnik.KorisnickoIme, model.User.Application,
+                                                     HttpContext.Request.UserHostAddress, HttpContext.Request.UserAgent);
 
                 Aplikacija aplikacija;
                 using (var rf = new RepositoryFactory())
                 {
                     aplikacija = rf.AplikacijeRepository.VratiAplikaciju(model.User.Application);
-                    log.Aplikacija = aplikacija.Naziv;
-                    log.IpAdresa = HttpContext.Request.UserHostAddress;
-                    log.Browser = HttpContext.Request.UserAgent;
-                    rf.LogoviKorisnikaRepository.Add(log);
-                    rf.LogoviKorisnikaRepository.Save();
                 }
 
                 var cookie = FormsAuthentication.GetAuthCookie(korisnik.KorisnickoIme, false);
@@ -96,6 +87,29 @@ namespace Korsinici.Web.Controllers
             {
                 TempData["Error"] = exc.Message;
                 return View("Login", model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LoginFromWindowsApp(User user)
+        {
+            try
+            {
+                var korisnik = Korisnici.ProveriKorisnika(user.Username, user.Password, user.Application);
+                var log = Korisnici.PrijaviKorisnika(user.Username, user.Application, HttpContext.Request.UserHostAddress, "windows");
+                return Json(new
+                {
+                    Status = "Ok", 
+                    Message = "Ok",
+                    LogId = log.Id,
+                    Username = korisnik.KorisnickoIme,
+                    FirstName = korisnik.Ime,
+                    LastName = korisnik.Prezime
+                }, "", Encoding.UTF8);
+            }
+            catch (Exception exc)
+            {
+                return Json(new {Status = "Error", exc.Message});
             }
         }
 
@@ -134,6 +148,12 @@ namespace Korsinici.Web.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", new{appcode = "admin"});
+        }
+
+        [HttpPost]
+        public void Logout(int idLoga)
+        {
+            Korisnici.OdjaviKorisnika(idLoga);
         }
 
         public ActionResult MojProfil(string appCode, string verificationKey)

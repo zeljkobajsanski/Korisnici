@@ -1,4 +1,5 @@
 ﻿using System;
+using Korisnici.ClientLibrary;
 using rs.mvc.Korisnici.Model;
 using rs.mvc.Korisnici.Repository;
 using rs.mvc.Korisnici.Services;
@@ -11,6 +12,10 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
 
         static void Main(string[] args)
         {
+            //var account = new Account("http://localhost:49926/");
+            //var logInfo = account.Login("zeks", "Z3ks_J0va", "rvms");
+            //account.Logout(logInfo.LogId);
+
             _foregroundColor = Console.ForegroundColor;
             Console.WriteLine("Dobrodošli u administraciju korisnika");
             Console.WriteLine("Za spisak komandi unestite [pomoc]");
@@ -58,11 +63,25 @@ namespace rs.mvc.Korisnici.ConsoleAdmin
                 ListajKorisnikeAplikacije(command);
                 return;
             }
-
+            if (command.StartsWith("login"))
+            {
+                UlogujKorisnika(command);
+            }
             PrikaziGresku(command);
         }
 
-        
+        private static void UlogujKorisnika(string command)
+        {
+            var parts = command.Split(' ');
+            if (parts.Length != 4)
+            {
+                PrikaziGresku(command);
+                return;
+            }
+            var account = new Account("http://localhost:49926/");
+            account.Login(parts[1], parts[2], parts[3]);
+        }
+
 
         private static void ListajAplikacije()
         {
