@@ -99,11 +99,11 @@ namespace Korsinici.Web.Controllers
                 var korisnik = Korisnici.ProveriKorisnika(user.Username, user.Password, user.Application);
                 var log = Korisnici.PrijaviKorisnika(user.Username, user.Application, HttpContext.Request.UserHostAddress, "windows");
                 var logInfo = string.Format(format, "Ok", "Ok", log.Id, korisnik.KorisnickoIme, korisnik.Ime + " " + korisnik.Prezime);
-                return Content(logInfo);
+                return Content(logInfo, "text/plain", Encoding.GetEncoding("windows-1250"));
             }
             catch (Exception exc)
             {
-                return Content(string.Format(format, "Error", exc.Message, -1, "", ""));
+                return Content(string.Format(format, "Error", exc.Message, -1, "", ""), "text/plain", Encoding.GetEncoding("windows-1250"));
             }
         }
 
