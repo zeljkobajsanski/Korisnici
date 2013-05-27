@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Web.Script.Serialization;
+﻿using System.Net;
 
 namespace Korisnici.ClientLibrary
 {
@@ -21,9 +19,15 @@ namespace Korisnici.ClientLibrary
             try
             {
                 var response = client.UploadString(m_AuthServiceUrl + "/Account/LoginFromWindowsApp", "POST", parameters);
-                var jss = new JavaScriptSerializer();
-                var logInfo = jss.Deserialize<LogInfo>(response);
-                return logInfo;
+                var logInfo = response.Split('|');
+                return new LogInfo
+                           {
+                               Status = logInfo[0],
+                               Message = logInfo[1],
+                               LogId = int.Parse(logInfo[2]),
+                               Username = logInfo[3],
+                               FirstName = logInfo[4],
+                           };
             }
             catch (System.Exception exc)
             {

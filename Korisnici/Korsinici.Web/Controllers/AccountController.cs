@@ -93,23 +93,17 @@ namespace Korsinici.Web.Controllers
         [HttpPost]
         public ActionResult LoginFromWindowsApp(User user)
         {
+            const string format = "{0}|{1}|{2}|{3}|{4}";
             try
             {
                 var korisnik = Korisnici.ProveriKorisnika(user.Username, user.Password, user.Application);
                 var log = Korisnici.PrijaviKorisnika(user.Username, user.Application, HttpContext.Request.UserHostAddress, "windows");
-                return Json(new
-                {
-                    Status = "Ok", 
-                    Message = "Ok",
-                    LogId = log.Id,
-                    Username = korisnik.KorisnickoIme,
-                    FirstName = korisnik.Ime,
-                    LastName = korisnik.Prezime
-                }, "", Encoding.UTF8);
+                var logInfo = string.Format(format, "Ok", "Ok", log.Id, korisnik.KorisnickoIme, korisnik.Ime + " " + korisnik.Prezime);
+                return Content(logInfo);
             }
             catch (Exception exc)
             {
-                return Json(new {Status = "Error", exc.Message});
+                return Content(string.Format(format, "Error", exc.Message, -1, "", ""));
             }
         }
 
