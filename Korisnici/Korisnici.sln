@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korsinici.Web", "Korsinici.Web\Korsinici.Web.csproj", "{E444144A-F570-42A9-8602-69923B2D7146}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korisnici.ClientLibrary", "..\Korisnici.ClientLibrary\Korisnici.ClientLibrary.csproj", "{105E467E-515E-4333-82DB-1071C927F422}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E444144A-F570-42A9-8602-69923B2D7146} = {E444144A-F570-42A9-8602-69923B2D7146}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

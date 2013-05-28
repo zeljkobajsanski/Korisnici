@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Korsinici.Web.AccountsService" CodeBehind="AccountsService.svc.cs" %>

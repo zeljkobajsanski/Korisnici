@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using System.ServiceModel;
+using Korisnici.ClientLibrary.WebServices.AccountsService;
 
 namespace Korisnici.ClientLibrary
 {
@@ -13,35 +15,63 @@ namespace Korisnici.ClientLibrary
 
         public LogInfo Login(string userName, string password, string appCode)
         {
-            var client = new WebClient();
-            client.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            var parameters = string.Format("Username={0}&Password={1}&Application={2}", userName, password, appCode);
             try
             {
-                var response = client.UploadString(m_AuthServiceUrl + "/Account/LoginFromWindowsApp", "POST", parameters);
-                var logInfo = response.Split('|');
-                return new LogInfo
-                           {
-                               Status = logInfo[0],
-                               Message = logInfo[1],
-                               LogId = int.Parse(logInfo[2]),
-                               Username = logInfo[3],
-                               FirstName = logInfo[4],
-                           };
+                using (var svc = GetService())
+                {
+                    var loginInfo = svc.Login(userName, password, appCode);
+                    return new LogInfo
+                    {
+                        Status = loginInfo.Status,
+                        Message = loginInfo.StatusMessage,
+                        LogId = loginInfo.LogId,
+                        UserId = loginInfo.IdKorisnika,
+                        Username = loginInfo.KorisnickoIme,
+                        Name = loginInfo.ImeIPrezime
+                    };
+                }
             }
             catch (System.Exception exc)
             {
-                throw;
+                return new LogInfo {Status = "Error", Message = exc.Message};
             }
-            return null;
+        }
+
+        private AccountsServiceClient GetService()
+        {
+            return new AccountsServiceClient(new BasicHttpBinding(), new EndpointAddress(m_AuthServiceUrl + "/AccountsService.svc"));
         }
 
         public void Logout(int logId)
         {
-            var client = new WebClient();
-            client.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            var parameters = string.Format("idLoga={0}", logId);
-            client.UploadString(m_AuthServiceUrl + "/Account/Logout", "POST", parameters);
+            using (var svc = GetService())
+            {
+                svc.Logout(logId);
+            }
+        }
+
+        public Korisnik GetUserInfo(int id)
+        {
+            using (var svc = GetService())
+            {
+                return svc.GetUserInfo(id);
+            }
+        }
+
+        public void Save(Korisnik korisnik)
+        {
+            using (var svc = GetService())
+            {
+                svc.Save(korisnik);
+            }
+        }
+
+        public void ChangePassword(int userId, string password)
+        {
+            using (var svc = GetService())
+            {
+                svc.ChangePassword(userId, password);
+            }
         }
     }
 }

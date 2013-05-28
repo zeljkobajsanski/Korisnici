@@ -67,6 +67,7 @@ namespace rs.mvc.Korisnici.Services
             using (var r = new LogoviKorisnikaRepository())
             {
                 var log = r.Get(logId);
+                log.Aktivan = false;
                 log.VremeOdjave = DateTime.Now;
                 r.Save();
             }
