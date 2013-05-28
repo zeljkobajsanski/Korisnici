@@ -90,23 +90,6 @@ namespace Korsinici.Web.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult LoginFromWindowsApp(User user)
-        {
-            const string format = "{0}|{1}|{2}|{3}|{4}";
-            try
-            {
-                var korisnik = Korisnici.ProveriKorisnika(user.Username, user.Password, user.Application);
-                var log = Korisnici.PrijaviKorisnika(user.Username, user.Application, HttpContext.Request.UserHostAddress, "windows");
-                var logInfo = string.Format(format, "Ok", "Ok", log.Id, korisnik.KorisnickoIme, korisnik.Ime + " " + korisnik.Prezime);
-                return Content(logInfo, "text/plain", Encoding.GetEncoding("windows-1250"));
-            }
-            catch (Exception exc)
-            {
-                return Content(string.Format(format, "Error", exc.Message, -1, "", ""), "text/plain", Encoding.GetEncoding("windows-1250"));
-            }
-        }
-
         public ActionResult Register(string appCode)
         {
             using (var rf = new RepositoryFactory())

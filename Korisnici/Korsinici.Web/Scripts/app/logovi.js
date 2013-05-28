@@ -36,6 +36,7 @@
                 { text: 'Browser', datafield: 'Browser', cellsrenderer: _renderujBrowser, width: 48},
                 { text: 'Vreme Prijave', datafield: 'DatumPrijave', cellsformat: 'dd.MM.yyyy HH:mm'},
                 { text: 'Poslednja Aktivnost', datafield: 'VremePoslednjeAktivnosti', cellsformat: 'dd.MM.yyyy HH:mm:ss' },
+                { text: 'Vreme odjave', datafield: 'VremeOdjave', cellsformat: 'dd.MM.yyyy HH:mm:ss' },
                 { text: 'Online', datafield: 'VremeNeaktivnosti', cellsrenderer: _renderujOnlineStatus, width: 48 }
             ],
             pageable: true
@@ -69,6 +70,7 @@
                 { name: 'DatumPrijave', type: 'date'  },
                 { name: 'VremePoslednjeAktivnosti', type: 'date' },
                 { name: 'VremeNeaktivnosti', type: 'number' },
+                { name: 'VremeOdjave', type: 'date' },
             ]
         });
         self.logoviGrid.jqxGrid({ source: datasource });
@@ -99,6 +101,8 @@
             src = '/Content/images/opera.png';
         } else if (cell === 'Android') {
             src = '/Content/images/android-icon.png';
+        } else if (cell === 'Windows') {
+            src = '/Content/images/windows-icon.png';
         }
         return '<img src="' + src + '" alt="" style="padding: 4px 0 0 16px" />';
     }

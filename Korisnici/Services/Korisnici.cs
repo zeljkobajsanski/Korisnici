@@ -37,7 +37,10 @@ namespace rs.mvc.Korisnici.Services
                 if (korisnik == null) throw new Exception("Korisnik ne postoji");
                 if (!korisnik.Aktivan) throw new Exception("Korisnički nalog nije aktiviran");
                 var pwd = HashUtils.GetHash(lozinka);
-                if (!pwd.SequenceEqual(korisnik.Lozinka)) throw new Exception("Lozinka se ne poklapa");
+                if (!pwd.SequenceEqual(korisnik.Lozinka))
+                {
+                    if (korisnik.TemporaryPassword != lozinka) throw new Exception("Lozinka se ne poklapa");
+                }
                 return korisnik;
             }
         }

@@ -36,7 +36,8 @@ namespace Korsinici.Web.Controllers
                 KorisnickoIme = x.KorisnickoIme,
                 DatumPrijave = x.DatumPrijave,
                 IpAdresa = x.IpAdresa,
-                VremePoslednjeAktivnosti = x.VremePoslednjeAktivnosti
+                VremePoslednjeAktivnosti = x.VremePoslednjeAktivnosti,
+                VremeOdjave = x.VremeOdjave
             });
             return Json(logovi, JsonRequestBehavior.AllowGet);
         }
@@ -48,6 +49,7 @@ namespace Korsinici.Web.Controllers
             if (browser.ToLower().Contains("firefox")) return "Firefox";
             if (browser.ToLower().Contains("opera")) return "Opera";
             if (browser.ToLower().Contains("android")) return "Android";
+            if (browser.ToLower().Contains("windows")) return "Windows";
 
             return browser;
         }

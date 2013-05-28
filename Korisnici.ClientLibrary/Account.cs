@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.ServiceModel;
 using Korisnici.ClientLibrary.WebServices.AccountsService;
 
@@ -19,7 +20,7 @@ namespace Korisnici.ClientLibrary
             {
                 using (var svc = GetService())
                 {
-                    var loginInfo = svc.Login(userName, password, appCode);
+                    var loginInfo = svc.Login(userName, password, appCode, Environment.MachineName);
                     return new LogInfo
                     {
                         Status = loginInfo.Status,
@@ -71,6 +72,14 @@ namespace Korisnici.ClientLibrary
             using (var svc = GetService())
             {
                 svc.ChangePassword(userId, password);
+            }
+        }
+
+        public bool ResetPassword(string username, string appCode)
+        {
+            using (var svc = GetService())
+            {
+                return svc.ResetPassword(username, appCode);
             }
         }
     }

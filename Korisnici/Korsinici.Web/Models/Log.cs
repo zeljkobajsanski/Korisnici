@@ -11,11 +11,20 @@ namespace Korsinici.Web.Models
         public DateTime DatumPrijave { get; set; }
 
         public DateTime VremePoslednjeAktivnosti { get; set; }
+        
+        public DateTime? VremeOdjave { get; set; }
 
         public string IpAdresa { get; set; }
 
         public string Browser { get; set; }
 
-        public int VremeNeaktivnosti { get { return (int)DateTime.Now.Subtract(VremePoslednjeAktivnosti).TotalMinutes; } }
+        public int VremeNeaktivnosti
+        {
+            get
+            {
+                if (VremeOdjave.HasValue) return 1000;
+                return (int)DateTime.Now.Subtract(VremePoslednjeAktivnosti).TotalMinutes;
+            }
+        }
     }
 }

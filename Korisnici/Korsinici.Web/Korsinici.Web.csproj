@@ -146,6 +146,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="AccountsService.svc" />
+    <Content Include="Content\images\windows-icon.png" />
     <Content Include="favicon.png" />
     <Content Include="Content\account.css" />
     <Content Include="Content\application.css" />
