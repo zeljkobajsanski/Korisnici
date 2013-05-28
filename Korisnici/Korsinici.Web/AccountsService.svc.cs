@@ -28,7 +28,7 @@ namespace Korsinici.Web
             try
             {
                 var korisnik = Korisnici.ProveriKorisnika(username, password, appCode);
-                var log = Korisnici.PrijaviKorisnika(username, appCode, HttpContext.Current.Request.UserHostAddress, "windows");
+                var log = Korisnici.PrijaviKorisnika(username, appCode, machine, "windows");
                 return new Login
                 {
                     IdKorisnika = korisnik.Id,
@@ -95,8 +95,8 @@ namespace Korsinici.Web
                 sb.Append("Primili ste ovaj e-mail pošto ste zahtevali promenu lozinke za aplikaciju ").Append(aplikacija.Naziv).Append("</p>");
                 sb.Append("<p>Vaša nova lozinka je: " + password).Append("</p>");
                 sb.Append("<p>Srdačan pozdrav, <br/>").Append(aplikacija.Naziv).Append(" tim</p>");
-                var host = new Uri(HttpContext.Current.Request.Url.AbsoluteUri).GetLeftPart(UriPartial.Authority);
-                sb.Append("<img src='").Append(host + "/Content/images/logo/" + aplikacija.Logo).Append("' alt='' />");
+                //var host = new Uri(HttpContext.Current.Request.Url.AbsoluteUri).GetLeftPart(UriPartial.Authority);
+                //sb.Append("<img src='").Append(host + "/Content/images/logo/" + aplikacija.Logo).Append("' alt='' />");
                 using (var smtp = new SmtpClient())
                 {
                     var emailBody = sb.ToString();
